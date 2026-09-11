@@ -22,7 +22,7 @@ image animated_thoughtDialogueBox:
 # name of the character.
 
 define t = Character("???", window_background="animated_thoughtDialogueBox")
-
+define n = Character("???", window_background="gui/textbox.png")
 # The game starts here.
 
 label start:
@@ -85,11 +85,26 @@ label start:
 
     t "You don't have the time to rot anymore."
 
+    menu wakeup:
+        "Wake up.":
+            pass 
+
+        # makes it proceed without doing anything
+
+        "Rot.":
+            t "Maybe it's better this way."
+            t "You won't bother anyone here."
+            return
+
+    # choice dialogue
+
     scene bg bedroom 
 
     $ renpy.movie_cutscene("videos/riseandshine.webm")
 
     t "Rise and shine."
+
+    n "test dialogue"
 
     # This ends the game.
 
