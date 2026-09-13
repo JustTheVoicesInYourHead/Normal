@@ -29,7 +29,11 @@ define config.version = "1.0"
 ## Text that is placed on the game's about screen. Place the text between the
 ## triple-quotes, and leave a blank line between paragraphs.
 
-define gui.about = _p("""
+define gui.about = _p("""You are normal. You've been told this your entire life. You've lived like this your entire life. There's no reason to believe you aren't.
+But why do people keep staring at you like you're some kind of monster?
+Is that all that lies beneath? Or is that all anyone cares to see?
+
+Is this supposed to be normal?
 """)
 
 
@@ -39,6 +43,9 @@ define gui.about = _p("""
 
 define build.name = "Normal"
 
+# Determines whether the player is okay with seeing certain sensitive content (such as eyes, spiders, etc.)
+
+default persistent.hide_scopophobia_content = True
 
 ## Sounds and music ############################################################
 
@@ -89,7 +96,7 @@ define config.after_load_transition = None
 
 ## Used when entering the main menu after the game has ended.
 
-define config.end_game_transition = None
+define config.end_game_transition = dissolve
 
 
 ## A variable to set the transition used when the game starts does not exist.

@@ -130,6 +130,8 @@ style namebox_label is say_label
 
 
 style window:
+
+    xsize 1920
     xalign 0.5
     xfill False
     yalign gui.textbox_yalign
@@ -352,10 +354,15 @@ style navigation_button_text:
 
 screen main_menu():
 
-    ## This ensures that any other menu screen is replaced.
     tag menu
 
-    add gui.main_menu_background
+    # Change the background image based on the unlocked ending (USE ELIF STATEMENTS HERE)
+    if persistent.current_ending == "rot":
+        add "images/bg darkness.jpg" size (config.screen_width, config.screen_height)
+    elif persistent.hide_scopophobia_content:
+        add "images/main_menus/NO_EYES/NOEYESmain-menuRegular.jpg" size (config.screen_width, config.screen_height)
+    else:
+        add "images/main_menus/EYES/EYESmain-menuRegular.jpg" size (config.screen_width, config.screen_height)
 
     ## This empty frame darkens the main menu.
     frame:
@@ -756,6 +763,11 @@ screen preferences():
                     textbutton _("After Choices") action Preference("after choices", "toggle")
                     textbutton _("Transitions") action InvertSelected(Preference("transitions", "toggle"))
 
+                # The option for enabling/disabling scopophobia mode
+                vbox:
+                    style_prefix "check"
+                    label _("Content Settings")
+                    textbutton _("Scopophobia mode") action [ToggleField(persistent, "hide_scopophobia_content")]
                 ## Additional vboxes of type "radio_pref" or "check_pref" can be
                 ## added here, to add additional creator-defined preferences.
 
@@ -1138,6 +1150,49 @@ style help_label_text:
 ## Additional screens
 ################################################################################
 
+# Name Popup
+
+# Initialize a default variable for the player's name
+default player_name = "You"
+
+screen name_input():
+    modal True
+    add "#00000080" # Dim background
+
+    frame:
+        xalign 0.5
+        yalign 0.5
+        xsize 500
+        ysize 300
+        xpadding 30
+        ypadding 30
+        background "#222"
+
+        vbox:
+            align (0.5, 0.5)
+            spacing 25
+
+            text "Who are you?":
+                size 28
+                bold True
+                xalign 0.5
+                color "#fff"
+
+            # The Input Box
+            input:
+                id "input" # Tells Ren'Py this is the input focus
+                value VariableInputValue("player_name") # Binds text directly to our variable
+                length 32 # Maximum character limit
+                size 24
+                color "#fff"
+                xalign 0.5
+                allow "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ" # Restricts to letters only
+
+            # Confirm Button
+            textbutton "This is me.":
+                xalign 0.5
+                # The Return() action closes the 'call screen' and saves the input
+                action Return() 
 
 ## Confirm screen ##############################################################
 ##

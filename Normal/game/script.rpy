@@ -1,5 +1,10 @@
 ﻿# The script of the game goes in this file.
 
+# Checks the settings to see the player's preferred settings 
+
+# Ensures that the player opens the game and starts off with no ending.
+default persistent.current_ending = "none"
+
 # Initiates the typing effect of each word
 define config.default_textshader = "typewriter"
 
@@ -21,12 +26,13 @@ image animated_thoughtDialogueBox:
 # Declare characters used by this game. The color argument colorizes the
 # name of the character.
 
-define t = Character("???", window_background="animated_thoughtDialogueBox")
-define n = Character("???", window_background="gui/textbox.png")
+define t = Character("???", window_background="animated_thoughtDialogueBox", what_ypos=0.3, window_yoffset=-90)
+define narrator = Character(window_background=Frame("gui/narratortextbox.png"), what_color="#000000")
+define mc = Character("You", window_background=Frame("gui/textbox.png"))
+
 # The game starts here.
 
 label start:
-
     # Show a background. This uses a placeholder by default, but you can
     # add a file (named either "bg room.png" or "bg room.jpg") to the
     # images directory to show it.
@@ -94,6 +100,15 @@ label start:
         "Rot.":
             t "Maybe it's better this way."
             t "You won't bother anyone here."
+            t "You won't waste anyone's time."
+            t "You'll no longer be a burden."
+            t "..."
+            t "..."
+            t "{shader=jitter:u__jitter=6.0, 4.0}. . .{/shader}"
+            t "Good riddance.{w=1.0}{nw}"
+            $ persistent.current_ending = "rot"
+            $ renpy.restart_interaction() 
+            "Ending 1: [persistent.current_ending]"
             return
 
     # choice dialogue
@@ -104,8 +119,24 @@ label start:
 
     t "Rise and shine."
 
-    n "test dialogue"
+    mc "Ugh."
 
+    mc "That might have been the worst one this week."
+
+    mc "...I think."
+
+    "This is the story of a man named Stanley. Stanley worked for a company in a big building where he was employee # 427. Employee # 427’s job was"
+
+    call screen name_input
+    $ mc = player_name
+
+    if not player_name.strip():
+        $ mc = "..."
+        t "Getting up is hard enough. You don't need to waste anymore energy on remembering your name."
+        t "You doubt anyone cares enough about it to make it worth the effort."
+    
+    $ renpy.restart_interaction() 
+    mc "I guess this is who I am now, maaaaaaaaaaaaaaaaan."
     # This ends the game.
 
     return
