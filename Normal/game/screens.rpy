@@ -767,7 +767,7 @@ screen preferences():
                 vbox:
                     style_prefix "check"
                     label _("Content Settings")
-                    textbutton _("Scopophobia mode") action [ToggleField(persistent, "hide_scopophobia_content")]
+                    textbutton _("Enable Scopophobia content") action [ToggleField(persistent, "hide_scopophobia_content")]
                 ## Additional vboxes of type "radio_pref" or "check_pref" can be
                 ## added here, to add additional creator-defined preferences.
 

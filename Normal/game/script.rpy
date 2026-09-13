@@ -119,13 +119,31 @@ label start:
 
     t "Rise and shine."
 
+    mc "..."
+
     mc "Ugh."
 
     mc "That might have been the worst one this week."
 
     mc "...I think."
 
-    "This is the story of a man named Stanley. Stanley worked for a company in a big building where he was employee # 427. Employee # 427’s job was"
+    mc "Let me go wash up."
+
+    "You climb out of bed and go to the bathroom."
+    
+    "Dragging yourself along to do the bare minimum."
+
+    # scene change to infront of a sink
+
+    "You splash your face with water."
+
+    "Preparing for the day ahead."
+
+    "You notice your reflection in the mirror."
+
+    "You stare blankly at it for a while until you realise."
+
+    mc "...What is my name?"
 
     call screen name_input
     $ mc = player_name
@@ -136,7 +154,21 @@ label start:
         t "You doubt anyone cares enough about it to make it worth the effort."
     
     $ renpy.restart_interaction() 
-    mc "I guess this is who I am now, maaaaaaaaaaaaaaaaan."
+    
+    mc "I think that's my name."
+
+    mc "How do I forget my own name? I'm so... stupid."
+
+    mc "If I have forgotten my name, what else will i forget?"
+
+    mc "My age? My address? My own family's faces?"
+
+    mc "Would I lose my job for being so stupid?"
+
+    # maybe brief cutscenes inbetween each sentence of a balloon inflating and deflating slightly until it pops as they get distracted (like lateness? knocking?)
+    # to like symbolise a panic attack
+
+
     # This ends the game.
 
     return
